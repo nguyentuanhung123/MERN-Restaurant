@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // icons
 import { BiShow, BiHide } from 'react-icons/bi'
-import { BsEmojiSmileUpsideDown } from 'react-icons/bs';
+// import { BsEmojiSmileUpsideDown } from 'react-icons/bs';
 
 // utilities
 import { ImageToBase64 } from '../utilities/ImageToBase64';
@@ -27,7 +27,7 @@ const SignUp = () => {
         image: ""
     })
 
-    console.log("Data: ", data);
+    // console.log("Data: ", data);
 
     const handleShowPassword = () => {
         setShowPassword(prev => !prev)

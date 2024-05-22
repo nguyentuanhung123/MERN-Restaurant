@@ -56,3 +56,116 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ### Sử dụng React-hot-toast
 - B1: npm i react-hot-toast
 - B2: Vào Ap.jsx và sửa
+
+### Add redux
+- B1: npm i redux react-redux @reduxjs/toolkit
+- B2: Tạo file index.jsx trong folder redux
+```jsx
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+  reducer: {},
+})
+```
+- B3: Vào main.jsx và sửa
+```jsx
+// redux
+import { store } from './redux/index.jsx'
+import { Provider } from 'react-redux'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <RouterProvider router={router}/>
+  </Provider>
+)
+```
+
+- B4: Tạo slice bằng cách tạo file useSlice.jsx trong folder redux 
+```jsx
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {}
+
+export const userSlice = createSlice({
+    name: "user",
+    initialState,
+    reducers: {
+        loginRedux: (state, action) => {
+            console.log(action);
+        }
+    }
+})
+
+export const { loginRedux } = userSlice.actions
+
+export default userSlice.reducer
+```
+
+- B5: Sửa lại file index.jsx trong trong folder redux 
+
+```jsx
+import { configureStore } from '@reduxjs/toolkit'
+
+import userSliceReducer from './userSlice';
+
+export const store = configureStore({
+    // reducer: {},
+    reducer: {
+        user: userSliceReducer
+    }
+})
+```
+- B6: Sửa lại userSlice.jsx
+
+```jsx
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+    email: "",
+    firstName: "",
+    image: "",
+    lastName: "",
+    _id: ""
+}
+
+export const userSlice = createSlice({
+    name: "user",
+    initialState,
+    reducers: {
+        loginRedux: (state, action) => {
+            // console.log(action); // trả về 1 object {type: 'user/loginRedux', payload: {data: {...}, mesage: "...", success: true}}
+            console.log(action.payload.data)
+            state.email = action.payload.data.email,
+            state.firstName = action.payload.data.firstName,
+            state.image = action.payload.data.image,
+            state.lastName = action.payload.data.lastName,
+            state._id = action.payload.data._id
+        }
+    }
+})
+
+export const { loginRedux } = userSlice.actions
+
+export default userSlice.reducer
+```
+
+- B7: Ở file login
+
+```jsx
+// redux
+import { loginRedux } from '../redux/userSlice';
+
+const userData = useSelector(state => state)
+  // console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
+  // console.log("userData on reducer 2: ", userData.user); // {email: "", ....}
+
+const dispatch = useDispatch();
+
+if(dataRes.success) {
+    dispatch(loginRedux(dataRes))
+    setTimeout(() => {
+      navigate("/")
+    }1000)
+} 
+console.log(userData);
+```

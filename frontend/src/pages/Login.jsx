@@ -1,7 +1,18 @@
 import { useState } from 'react'
 import loginSignupImage from '../assets/login-animation.gif'
+
+// icons
 import { BiShow, BiHide } from 'react-icons/bi'
-import { Link } from 'react-router-dom';
+
+// router
+import { Link, useNavigate } from 'react-router-dom';
+
+// toast
+import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+
+// redux
+import { loginRedux } from '../redux/userSlice';
 
 
 const Login = () => {
@@ -12,7 +23,15 @@ const Login = () => {
         password: "",
     })
 
-    console.log("Data: ", data);
+    const navigate = useNavigate()
+
+    const userData = useSelector(state => state)
+    // console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
+    // console.log("userData on reducer 2: ", userData.user); // {email: "", ....}
+
+    const dispatch = useDispatch();
+
+    // console.log("Data: ", data);
 
     const handleShowPassword = () => {
         setShowPassword(prev => !prev)
@@ -28,12 +47,31 @@ const Login = () => {
         })
     }  
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { email, password } = data;
 
         if( email && password ) {
-            alert("successfull")
+            const dataResponse = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/signin`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+
+            const dataRes = await dataResponse.json()
+            console.log(dataRes);
+            
+            toast(dataRes.message)
+
+            if(dataRes.success) {
+                dispatch(loginRedux(dataRes))
+                setTimeout(() => {
+                    navigate("/")
+                }, 1000)
+            } 
+            // console.log(userData); // trả về user cũ (hoặc không có dữ liệu)
         }
         else {
             alert("Please enter required fields")
