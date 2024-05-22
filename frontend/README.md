@@ -47,3 +47,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```jsx
 <input type='file' id='profileImage' accept='image/*' className='hidden' onChange={handleUploadProfileImage}/>
 ```
+
+### Lưu ý khi muốn đọc file .env trong VITE: 
+- File .env phải nằm trong root (cùng cấp package.json)
+- Khi đặt tên các biến trong .env phải có tên bắt đầu là VITE thì mới chạy được
+- Thay vì là: process.env... như react-app thì ở Vite là: import.meta.env....
+
+### Sử dụng React-hot-toast
+- B1: npm i react-hot-toast
+- B2: Vào Ap.jsx và sửa

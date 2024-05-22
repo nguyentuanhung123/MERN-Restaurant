@@ -9,6 +9,8 @@ import { BsEmojiSmileUpsideDown } from 'react-icons/bs';
 // utilities
 import { ImageToBase64 } from '../utilities/ImageToBase64';
 
+// toast
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
 
@@ -45,14 +47,30 @@ const SignUp = () => {
         })
     }  
 
-    const handleSubmit = (e) => {
+
+    // console.log("Domain: ", import.meta.env.VITE_SERVER_DOMAIN);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { firstName, email, password, confirmPassword } = data;
 
         if(firstName && email && password && confirmPassword) {
             if(password === confirmPassword) {
-                alert("successfull")
-                navigate("/login")
+                const dataResponse = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/signup`, {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                })
+
+                const dataRes = await dataResponse.json()
+                // console.log(dataRes);
+
+                toast(dataRes.message)
+                if(dataRes.success) {
+                    navigate("/login")
+                }
             } else {
                 alert("password and confirm password not equal")
             }
