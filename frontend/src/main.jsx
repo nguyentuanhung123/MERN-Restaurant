@@ -7,6 +7,9 @@ import Home from './pages/Home.jsx'
 import Menu from './pages/Menu.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
+import Login from './pages/Login.jsx'
+import NewProduct from './pages/NewProduct.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +18,9 @@ const router = createBrowserRouter(
       <Route path='menu' element={<Menu />}/>
       <Route path='about' element={<About />}/>
       <Route path='contact' element={<Contact />}/>
+      <Route path='newproduct' element={<NewProduct />}></Route>
+      <Route path='login' element={<Login />}></Route>
+      <Route path='signup' element={<SignUp />}></Route>
     </Route>
   )
 )
