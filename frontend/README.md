@@ -169,3 +169,9 @@ if(dataRes.success) {
 } 
 console.log(userData);
 ```
+
+### Lưu ý : 
+
+- Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong
+- Thẻ span khi chứa thẻ svg bên trong thì sẽ có width là 100% và height tùy chỉnh nhưng svg bên trong sẽ có mặc định riêng như 48x48
+- Ở thẻ textarea khi hiện lên màn hình thì có cơ chế tùy chỉnh dòng (ở bê trái góc dưới) -> để xóa tính năng này ta thêm class: resize-none

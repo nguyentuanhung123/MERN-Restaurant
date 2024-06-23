@@ -9,10 +9,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // toast
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
 
 // redux
 import { loginRedux } from '../redux/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const userData = useSelector(state => state)
-    // console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
+    console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
     // console.log("userData on reducer 2: ", userData.user); // {email: "", ....}
 
     const dispatch = useDispatch();
