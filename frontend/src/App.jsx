@@ -5,13 +5,23 @@ import Header from "./components/Header"
 import { Toaster } from 'react-hot-toast';
 import { useEffect } from "react";
 
+// redux product
+import { setDataProduct } from "./redux/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 const App = () => {
+
+  const dispatch = useDispatch();
+  const productData = useSelector((state) => state.product)
+
+  console.log(productData);
 
   useEffect(() => {
     (async () => {
       const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/products`)
       const resData = await res.json()
       console.log(resData);
+      dispatch(setDataProduct(resData))
     })()
   }, [])
 
