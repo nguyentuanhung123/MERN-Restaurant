@@ -1,6 +1,9 @@
 import CardFeature from "../components/CardFeature";
 import HomeCard from "../components/HomeCard"
+// redux
 import { useSelector } from 'react-redux'
+// icon
+import { GrPrevious, GrNext } from 'react-icons/gr'
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
@@ -8,6 +11,10 @@ const Home = () => {
     const homeProductCartList = productData.slice(1,5);
     const homeProductCartListVegetables = productData.filter((el) => el.category === "vegetable")
     // console.log("homeProductCartListVegetables: ", homeProductCartListVegetables);
+
+    // create loading
+    const loadingArray = new Array(4).fill(null);
+    // console.log("loadingArray : ", loadingArray ); // [null,null,null,null]
     return (
         <div className="p-2 md:p-4">
             <div className="md:flex gap-4 py-2">
@@ -29,7 +36,7 @@ const Home = () => {
 
                 <div className="md:w-1/2 flex flex-wrap gap-5 p-4 justify-center">
                     {
-                        homeProductCartList[0] && homeProductCartList.map((el) => {
+                        homeProductCartList[0] ? homeProductCartList.map((el) => {
                             return(
                                 <HomeCard 
                                     key={el._id}
@@ -40,13 +47,27 @@ const Home = () => {
                                 />
                             )
                         })
+                        :
+                        loadingArray.map((el, index) => {
+                            return(
+                                <HomeCard key={index} loading={"Loading..."}/>
+                            )
+                        })
                     }
                 </div>
             </div>
 
             <div className="">
-                <h2 className="font-bold text-2xl text-slate-800">Fresh Vegetables</h2>
-                <div className="">
+                <div className="flex w-full items-center">
+                    <h2 className="font-bold text-2xl text-slate-800 mb-4">
+                        Fresh Vegetables
+                    </h2>
+                    <div className="ml-auto flex gap-4">
+                        <button className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrPrevious /></button>
+                        <button className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrNext /></button>
+                    </div>
+                </div>
+                <div className="flex gap-5 overflow-scroll">
                     {
                         homeProductCartListVegetables.map((el) => {
                             return(

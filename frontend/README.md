@@ -170,6 +170,15 @@ if(dataRes.success) {
 console.log(userData);
 ```
 
+### Thêm scroll bar
+- B1: npm i tailwind-scrollbar
+- B2: Ở tailwind.config.js, thêm: 
+```css
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
+```
+
 ### Lưu ý : 
 
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong
