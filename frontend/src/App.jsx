@@ -3,8 +3,18 @@ import Header from "./components/Header"
 
 // toast
 import { Toaster } from 'react-hot-toast';
+import { useEffect } from "react";
 
 const App = () => {
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/products`)
+      const resData = await res.json()
+      console.log(resData);
+    })()
+  }, [])
+
   return (
     <>
       <Toaster />

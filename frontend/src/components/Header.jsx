@@ -18,7 +18,8 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     const userData = useSelector((state) => state.user)
-    console.log(userData); // {email: "", ....}
+    // console.log(userData); // {email: "", ....}
+    console.log(userData.email);
 
     const dispatch = useDispatch()
     
@@ -62,9 +63,18 @@ const Header = () => {
                         {
                             showMenu && (
                                 <div className='absolute right-2 bg-white py-2 shadow drop-shadow-md flex flex-col'>
-                                    <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer px-2'>New product</Link>
+                                    {/* Nếu email đươc lưu ở Redux trùng với admin-email thì hiện ra navbar New product */}
                                     {
-                                        userData.image ? <p className='cursor-pointer text-white bg-red-500 px-2' onClick={handleLogout}>Logout</p> : <Link to={"login"} className='whitespace-nowrap cursor-pointer px-2'>Login</Link>
+                                        userData.email === import.meta.env.VITE_ADMIN_EMAIL && (
+                                            <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer px-2'>New product</Link>
+                                        )
+                                    }
+                                    {
+                                        userData.image ? (
+                                            <p className='cursor-pointer text-white bg-red-500 px-2' onClick={handleLogout}>Logout ({userData.firstName})</p>
+                                        ) : (
+                                            <Link to={"login"} className='whitespace-nowrap cursor-pointer px-2'>Login</Link>
+                                        )
                                     }
                                 </div>
                             )
