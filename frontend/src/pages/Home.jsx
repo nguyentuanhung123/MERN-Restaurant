@@ -4,6 +4,8 @@ import HomeCard from "../components/HomeCard"
 import { useSelector } from 'react-redux'
 // icon
 import { GrPrevious, GrNext } from 'react-icons/gr'
+import { CiForkAndKnife } from 'react-icons/ci'
+// ref
 import { useRef } from "react";
 
 const Home = () => {
@@ -101,6 +103,18 @@ const Home = () => {
                             })
                         )
                     }
+                </div>
+            </div>
+
+            <div className="my-5">
+                <h2 className="font-bold text-2xl text-slate-800 mb-4">
+                    Your Product
+                </h2>
+
+                <div className="">
+                    <div className="">
+                        <CiForkAndKnife />
+                    </div>
                 </div>
             </div>
         </div>

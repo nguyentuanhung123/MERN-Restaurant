@@ -245,7 +245,7 @@ const prevProduct = () => {
 
 ## Nó sẽ không xuống dòng nữa nhưng sẽ bị tràn ra ngoài thẻ div cha chính vì vậy ta thêm overflow-hidden cho nó
 ```jsx
-
+<h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">{name}</h3>
 ```
 
 ### Lưu ý : 

@@ -46,7 +46,7 @@ const Header = () => {
                 </Link>
 
                 <div className='flex items-center gap-4 md:gap-6'>
-                    <nav className='flex gap-4 md:gap-6 text-base md:text-lg'>
+                    <nav className='hidden md:flex gap-4 md:gap-6 text-base md:text-lg'>
                         <Link to={""}>Home</Link>
                         <Link to={"menu"}>Menu</Link>
                         <Link to={"about"}>About</Link>
@@ -62,13 +62,14 @@ const Header = () => {
                         </div>
                         {
                             showMenu && (
-                                <div className='absolute right-2 bg-white py-2 shadow drop-shadow-md flex flex-col'>
+                                <div className='absolute right-2 bg-white py-2 shadow drop-shadow-md flex flex-col min-w-[120px] text-center'>
                                     {/* Nếu email đươc lưu ở Redux trùng với admin-email thì hiện ra navbar New product */}
                                     {
                                         userData.email === import.meta.env.VITE_ADMIN_EMAIL && (
                                             <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer px-2'>New product</Link>
                                         )
                                     }
+                                    {/* Nếu người dùng đã login thì hiện ra thêm navbar Logout còn ngược lại là Login*/}
                                     {
                                         userData.image ? (
                                             <p className='cursor-pointer text-white bg-red-500 px-2' onClick={handleLogout}>Logout ({userData.firstName})</p>
@@ -76,6 +77,12 @@ const Header = () => {
                                             <Link to={"login"} className='whitespace-nowrap cursor-pointer px-2'>Login</Link>
                                         )
                                     }
+                                    <nav className='text-base md:text-lg flex flex-col md:hidden'>
+                                        <Link to={""} className='px-2 py-1'>Home</Link>
+                                        <Link to={"menu"} className='px-2 py-1'>Menu</Link>
+                                        <Link to={"about"} className='px-2 py-1'>About</Link>
+                                        <Link to={"contact"} className='px-2 py-1'>Contact</Link>
+                                    </nav>
                                 </div>
                             )
                         }
