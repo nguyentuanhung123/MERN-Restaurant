@@ -179,6 +179,75 @@ console.log(userData);
   ],
 ```
 
+### Sử dung css overflow-scroll để tạo scroll chiều ngang
+```jsx
+<div className="flex gap-5 overflow-scroll">
+  {
+      homeProductCartListVegetables.map((el) => {
+          return(
+              <CardFeature 
+                  key={el._id}
+                  name={el.name}
+                  price={el.price}
+                  category={el.category}
+                  image={el.image}
+              />
+          )
+      })
+  }
+</div>
+```
+
+### Tạo các nút và function để scroll khi bấm
+
+```js
+const slideProductRef = useRef();
+    
+const nextProduct = () => {
+  slideProductRef.current.scrollLeft += 200
+}
+
+const prevProduct = () => {
+  slideProductRef.current.scrollLeft -= 200
+}
+```
+
+```jsx
+<div className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all" ref={slideProductRef}>
+    {
+        homeProductCartListVegetables[0] ? homeProductCartListVegetables.map((el) => {
+            return(
+                <CardFeature 
+                    key={el._id}
+                    name={el.name}
+                    price={el.price}
+                    category={el.category}
+                    image={el.image}
+                />
+            )
+        })
+        : (
+            loadingArrayFeature.map((el, index) => {
+                return(
+                    <CardFeature key={index} loading="Loading..."/>
+                )
+            })
+        )
+    }
+</div>
+```
+
+### Trong trường hợp text quá dài mà phải xuống dòng do thẻ div cha có giới hạn mà ta muốn nó không xuống dòng ta thêm whitespace-nowrap
+
+```jsx
+<h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap">{name}</h3>
+```
+
+## Nó sẽ không xuống dòng nữa nhưng sẽ bị tràn ra ngoài thẻ div cha chính vì vậy ta thêm overflow-hidden cho nó
+```jsx
+
+```
+
 ### Lưu ý : 
 
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong

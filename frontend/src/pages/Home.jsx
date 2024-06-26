@@ -4,6 +4,7 @@ import HomeCard from "../components/HomeCard"
 import { useSelector } from 'react-redux'
 // icon
 import { GrPrevious, GrNext } from 'react-icons/gr'
+import { useRef } from "react";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
@@ -15,6 +16,18 @@ const Home = () => {
     // create loading
     const loadingArray = new Array(4).fill(null);
     // console.log("loadingArray : ", loadingArray ); // [null,null,null,null]
+    const loadingArrayFeature = new Array(10).fill(null);
+
+    // create function to scroll
+    const slideProductRef = useRef();
+    
+    const nextProduct = () => {
+        slideProductRef.current.scrollLeft += 200
+    }
+
+    const prevProduct = () => {
+        slideProductRef.current.scrollLeft -= 200
+    }
     return (
         <div className="p-2 md:p-4">
             <div className="md:flex gap-4 py-2">
@@ -63,13 +76,13 @@ const Home = () => {
                         Fresh Vegetables
                     </h2>
                     <div className="ml-auto flex gap-4">
-                        <button className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrPrevious /></button>
-                        <button className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrNext /></button>
+                        <button onClick={prevProduct} className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrPrevious /></button>
+                        <button onClick={nextProduct} className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded"><GrNext /></button>
                     </div>
                 </div>
-                <div className="flex gap-5 overflow-scroll">
+                <div className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all" ref={slideProductRef}>
                     {
-                        homeProductCartListVegetables.map((el) => {
+                        homeProductCartListVegetables[0] ? homeProductCartListVegetables.map((el) => {
                             return(
                                 <CardFeature 
                                     key={el._id}
@@ -80,6 +93,13 @@ const Home = () => {
                                 />
                             )
                         })
+                        : (
+                            loadingArrayFeature.map((el, index) => {
+                                return(
+                                    <CardFeature key={index} loading="Loading..."/>
+                                )
+                            })
+                        )
                     }
                 </div>
             </div>
