@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
+import AllProduct from "../components/AllProduct";
 
 
 const Menu = () => {
@@ -35,6 +36,8 @@ const Menu = () => {
                     </div>
                 </div>
             </div>
+
+            <AllProduct heading={"Related Product"}/>
         </div>
     )
 }

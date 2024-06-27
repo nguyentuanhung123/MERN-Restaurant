@@ -305,6 +305,11 @@ const [dataFilter, setDataFilter] = useState(productData)
 </div>
 ```
 
+### Ở Menu.jsx sau khi ta bấm vào một product bất kỳ sẽ chuyển sang trang thông tin của product đó và cuộn lên đầu
+```jsx
+<Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}><Link>
+```
+
 ### Lưu ý : 
 
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong

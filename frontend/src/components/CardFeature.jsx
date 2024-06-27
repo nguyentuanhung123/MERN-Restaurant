@@ -7,7 +7,7 @@ const CardFeature = ({name, image, price, category, loading, id}) => {
             {
                 image ? (
                     <>
-                        <Link to={`/menu/${id}`}>
+                        <Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}>
                             <div className="h-28 flex flex-col justify-center items-center">
                                 <img src={image} className="h-full"/>
                             </div>
