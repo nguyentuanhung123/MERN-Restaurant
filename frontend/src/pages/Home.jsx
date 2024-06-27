@@ -4,9 +4,9 @@ import HomeCard from "../components/HomeCard"
 import { useSelector } from 'react-redux'
 // icon
 import { GrPrevious, GrNext } from 'react-icons/gr'
-import { CiForkAndKnife } from 'react-icons/ci'
 // ref
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import FilterProduct from "../components/FilterProduct";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
@@ -20,7 +20,10 @@ const Home = () => {
     // console.log("loadingArray : ", loadingArray ); // [null,null,null,null]
     const loadingArrayFeature = new Array(10).fill(null);
 
-    // create function to scroll
+    /**
+     * create function to scroll
+     * 26/6/2024
+     */
     const slideProductRef = useRef();
     
     const nextProduct = () => {
@@ -29,6 +32,33 @@ const Home = () => {
 
     const prevProduct = () => {
         slideProductRef.current.scrollLeft -= 200
+    }
+
+    /**
+     * create categoryList
+     * 27/6/2024
+     */
+    const categoryList =  [...new Set(productData.map((el) => el.category))]
+    // console.log("categoryList: ", categoryList); // categoryList:['fruits', 'vegetable', 'rice', 'cake', 'burger', 'icream', 'pizza', 'dosa', 'paneer', 'sandwich']
+
+    /**
+     * filter data display
+     * 27/6/2024
+     */
+    const [filterBy, setFilterBy] = useState("")
+    const [dataFilter, setDataFilter] = useState([])
+
+    useEffect(() => {
+        setDataFilter(productData)
+    }, [productData])
+
+    const handleFilterProduct = (category) => {
+        const filter = productData.filter((el) => el.category.toLowerCase() === category.toLowerCase());
+        setDataFilter(() => {
+            return[
+                ...filter
+            ]
+        })
     }
     return (
         <div className="p-2 md:p-4">
@@ -111,10 +141,29 @@ const Home = () => {
                     Your Product
                 </h2>
 
-                <div className="">
-                    <div className="">
-                        <CiForkAndKnife />
-                    </div>
+                <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
+                    {
+                        categoryList[0] && categoryList.map((el) => {
+                            return(
+                                <FilterProduct key={el} category={el} onClick={() => handleFilterProduct(el)}/>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-3">
+                    {
+                        dataFilter.map((el) => {
+                            return(
+                                <CardFeature 
+                                    key={el._id}
+                                    image={el.image}
+                                    name={el.name}
+                                    category={el.category}
+                                />
+                            )
+                        })
+                    }
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 const CardFeature = ({name, image, price, category, loading}) => {
     return (
-        <div className="min-w-[200px] bg-white hover:shadow-lg drop-shadow-lg pt-5 px-4 cursor-pointer flex flex-col">
+        <div className="min-w-[200px] max-w-[200px] bg-white hover:shadow-lg drop-shadow-lg p-5 px-4 cursor-pointer flex flex-col">
             {
                 image ? (
                     <>

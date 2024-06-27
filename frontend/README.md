@@ -248,6 +248,43 @@ const prevProduct = () => {
 <h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">{name}</h3>
 ```
 
+### Lưu ý khi sử sử dụng new Set (trong Home.jsx)
+
+- Truyền một mảng tới Set() mới
+- Trả về 1 Object
+
+- TH1: Nếu ta để: const categoryList = new Set(productData.map((el) => el.category)) => Set(10) {'fruits', 'vegetable', 'rice', 'cake', 'burger', ...}
+
+- TH2: Nếu ta để: const categoryList = new Set(...productData.map((el) => el.category)) => Set(6) {'f', 'r', 'u', 'i', 't', 's'}
+
+- TH3: Nếu ta để: const categoryList = [...new Set(productData.map((el) => el.category))] => ['fruits', 'vegetable', 'rice', 'cake', 'burger', 'icream', 'pizza', 'dosa', 'paneer', 'sandwich']
+
+### Lý do sử dụng Set trong Home.jsx
+
+- TH1: Nếu ta để : const categoryList = productData.map((el) => el.category)
+
+-> Nó sẽ in ra categoryList: (60) [fruits', 'vegetable', 'fruits', 'rice', 'vegetable', 'cake', 'cake', 'vegetable', ...]
+
+- TH2: Nếu ta để : const categoryList =  [...new Set(productData.map((el) => el.category))]
+
+-> Nó sẽ in ra categoryList: (10) [fruits', 'vegetable', 'rice', 'cake', 'burger', 'icream', 'pizza', 'dosa', 'paneer', 'sandwich']
+
+# Kết luận: Sử dụng Set nếu ta muốn tạo ra 1 mảng không bị trùng lặp (trong trường hợp 1 nếu ta chỉ đơn thuần dùng map thì nó sẽ in ra tất cả  category của phần tử rồi cho vào mảng , nhưng nếu sử dụng như trường hợp 2 thì nó sẽ chỉ lấy category không trùng lặp rồi cho vào mảng)
+
+### Ở dạng mobile ta muốn người dùng có thẻ scroll bằng tay thì ta phải thêm overflow-scroll scrollbar-none
+
+```jsx
+<div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
+    {
+        categoryList[0] && categoryList.map((el) => {
+            return(
+                <FilterProduct category={el} key={el}/>
+            )
+        })
+    }
+</div>
+```
+
 ### Lưu ý : 
 
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong
