@@ -273,6 +273,26 @@ const prevProduct = () => {
 
 ### Ở dạng mobile ta muốn người dùng có thẻ scroll bằng tay thì ta phải thêm overflow-scroll scrollbar-none
 
+### Giải thích logic filterData ở Home.jsx
+```jsx
+const productData = useSelector((state) => state.product.productList);
+
+const [dataFilter, setDataFilter] = useState([])
+
+useEffect(() => {
+  setDataFilter(productData)
+}, [productData])
+```
+
+- Do productData lấy ở store nhưng trong store chỉ có dữ liệu sau khi useEffect ở App.jsx nên ban đầu productData ở Home.jsx không có dữ liệu chỉ sau khi các component trong project chạy xong thì useEffect ở App.jsx mới chạy và productData mới có dữ liệu
+- Lý do tại sao ta không để productData trong state dataFilter là do ban đầu productData không có dữ liệu nên khi state dataFilter cũng sẽ không có dữ liệu nên ta phải bổ sung useEffect trong Home.jsx để sau khi productData thay đổi thì state dataFilter sẽ được cập nhật dữ liệu
+- Nếu ta để
+```jsx
+const [dataFilter, setDataFilter] = useState(productData)
+```
+- Thì state dataFilter vẫn sẽ chỉ lấy mảng cũ là [] dù Home.jsx đã được re-render do useEffect ở App.jsx nên ta bắt buộc phải bổ sung useEffect như trên
+- Dù Home.jsx được re-render nhưng state dataFilter vẫn sẽ chỉ lấy mảng [] nên muốn
+
 ```jsx
 <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
     {

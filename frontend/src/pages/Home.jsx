@@ -10,10 +10,10 @@ import FilterProduct from "../components/FilterProduct";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
-    // console.log("productData data on home: ", productData);
+    console.log("productData data on home: ", productData);
     const homeProductCartList = productData.slice(1,5);
     const homeProductCartListVegetables = productData.filter((el) => el.category === "vegetable")
-    // console.log("homeProductCartListVegetables: ", homeProductCartListVegetables);
+    console.log("homeProductCartListVegetables: ", homeProductCartListVegetables);
 
     // create loading
     const loadingArray = new Array(4).fill(null);
@@ -45,7 +45,6 @@ const Home = () => {
      * filter data display
      * 27/6/2024
      */
-    const [filterBy, setFilterBy] = useState("")
     const [dataFilter, setDataFilter] = useState([])
 
     useEffect(() => {
@@ -118,6 +117,7 @@ const Home = () => {
                             return(
                                 <CardFeature 
                                     key={el._id}
+                                    id={el._id}
                                     name={el.name}
                                     price={el.price}
                                     category={el.category}
@@ -151,7 +151,7 @@ const Home = () => {
                     }
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-4 my-4">
                     {
                         dataFilter.map((el) => {
                             return(
@@ -160,6 +160,7 @@ const Home = () => {
                                     image={el.image}
                                     name={el.name}
                                     category={el.category}
+                                    price={el.price}
                                 />
                             )
                         })
