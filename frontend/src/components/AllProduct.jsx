@@ -24,13 +24,15 @@ const AllProduct = ({heading}) => {
      * filter data display
      * 27/6/2024
      */
-    const [dataFilter, setDataFilter] = useState([])
+    const [filterBy, setFilterBy] = useState("");
+    const [dataFilter, setDataFilter] = useState([]);
 
     useEffect(() => {
         setDataFilter(productData)
     }, [productData])
     
     const handleFilterProduct = (category) => {
+        setFilterBy(category)
         const filter = productData.filter((el) => el.category.toLowerCase() === category.toLowerCase());
         setDataFilter(() => {
             return[
@@ -51,7 +53,12 @@ const AllProduct = ({heading}) => {
                 {
                     categoryList[0] ? categoryList.map((el) => {
                         return(
-                            <FilterProduct key={el} category={el} onClick={() => handleFilterProduct(el)}/>
+                            <FilterProduct 
+                                key={el} 
+                                category={el}
+                                isActive={el.toLowerCase() === filterBy.toLowerCase()} 
+                                onClick={() => handleFilterProduct(el)}
+                            />
                         )
                     })
                     : (
