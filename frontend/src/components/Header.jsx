@@ -47,14 +47,18 @@ const Header = () => {
 
                 <div className='flex items-center gap-4 md:gap-6'>
                     <nav className='hidden md:flex gap-4 md:gap-6 text-base md:text-lg'>
-                        <Link to={""}>Home</Link>
-                        <Link to={"menu"}>Menu</Link>
-                        <Link to={"about"}>About</Link>
-                        <Link to={"contact"}>Contact</Link>
+                        <Link to={"/"}>Home</Link>
+                        <Link to={"/menu"}>Menu</Link>
+                        <Link to={"/about"}>About</Link>
+                        <Link to={"/contact"}>Contact</Link>
                     </nav>
                     <div className='text-2xl text-slate-600 relative'>
-                        <BsCartFill />
-                        <div className='absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 rounded-full m-0 p-0 text-sm flex items-center justify-center'>0</div>
+                        <Link to={"/cart"}>
+                            <BsCartFill />
+                            <div className='absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 rounded-full m-0 p-0 text-sm flex items-center justify-center'>
+                                0
+                            </div>
+                        </Link>
                     </div>
                     <div className='text-slate-600' onClick={handleShowMenu}>
                         <div className='text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md'>

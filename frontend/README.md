@@ -310,6 +310,9 @@ const [dataFilter, setDataFilter] = useState(productData)
 <Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}><Link>
 ```
 
+### Fix bugs: Khi ta render AllProduct cứ thế chạy mà không hiện loading 
+=> Thêm logic Loading
+
 ### Lưu ý : 
 
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong
