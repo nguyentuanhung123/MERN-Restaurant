@@ -17,12 +17,23 @@ export const productSlice = createSlice({
             state.productList = [...action.payload]
         },
         addCartItem: (state, action) => {
-            console.log(action);
-            const total = action.payload.price
-            state.cartItem = [...state.cartItem, {...action.payload, qty: 1, total: total}]
+            // console.log(action);
+            /**
+             * Kiểm tra product được thêm vào mảng cartItem đã có chưa bằng cách dùng hàm some
+             * 29/6/2024
+             */
+            const check = state.cartItem.some((el) => el._id === action.payload._id) // true or false
+            if(check) {
+                toast("Already Item In Cart")
+            }
+            else {
+                toast("Item Add Successfully")
+                const total = action.payload.price
+                state.cartItem = [...state.cartItem, {...action.payload, qty: 1, total: total}]
+            }
         },
         deleteCartItem: (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             toast("one item delete")
             const index = state.cartItem.findIndex((el) => el._id === action.payload)
             state.cartItem.splice(index, 1)
