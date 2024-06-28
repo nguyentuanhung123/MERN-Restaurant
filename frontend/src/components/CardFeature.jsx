@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { addCartItem } from "../redux/productSlice"
+import { addCartItem, increaseQty } from "../redux/productSlice"
 import { useDispatch } from "react-redux"
 // eslint-disable-next-line react/prop-types
 const CardFeature = ({name, image, price, category, loading, id}) => {
@@ -14,7 +14,7 @@ const CardFeature = ({name, image, price, category, loading, id}) => {
     const handleAddCartProduct = () => {
         dispatch(addCartItem({
             _id: id,
-            nmae: name,
+            name: name,
             price: price,
             category: category,
             image: image
