@@ -18,7 +18,7 @@ const AllProduct = ({heading}) => {
      * 27/6/2024
      */
     const categoryList =  [...new Set(productData.map((el) => el.category))]
-    console.log("categoryList: ", categoryList); // categoryList:['fruits', 'vegetable', 'rice', 'cake', 'burger', 'icream', 'pizza', 'dosa', 'paneer', 'sandwich']
+    // console.log("categoryList: ", categoryList); // categoryList:['fruits', 'vegetable', 'rice', 'cake', 'burger', 'icream', 'pizza', 'dosa', 'paneer', 'sandwich']
 
     /**
      * filter data display
@@ -79,7 +79,7 @@ const AllProduct = ({heading}) => {
                     : (
                         loadingArrayFeature.map((el, index) => {
                             return(
-                                <CardFeature key={index} loading="Loading..."/>
+                                <CardFeature key={index+"allProduct"} loading="Loading..."/>
                             )
                         })
                     )

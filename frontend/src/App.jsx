@@ -14,13 +14,13 @@ const App = () => {
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product)
 
-  console.log(productData);
+  // console.log(productData);
 
   useEffect(() => {
     (async () => {
       const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/products`)
       const resData = await res.json()
-      console.log(resData);
+      // console.log(resData);
       dispatch(setDataProduct(resData))
     })()
   }, [])

@@ -11,10 +11,10 @@ import AllProduct from "../components/AllProduct";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
-    console.log("productData data on home: ", productData);
+    // console.log("productData data on home: ", productData);
     const homeProductCartList = productData.slice(1,5);
     const homeProductCartListVegetables = productData.filter((el) => el.category === "vegetable")
-    console.log("homeProductCartListVegetables: ", homeProductCartListVegetables);
+    // console.log("homeProductCartListVegetables: ", homeProductCartListVegetables);
 
     // create loading
     const loadingArray = new Array(4).fill(null);
@@ -71,7 +71,7 @@ const Home = () => {
                         :
                         loadingArray.map((el, index) => {
                             return(
-                                <HomeCard key={index} loading={"Loading..."}/>
+                                <HomeCard key={index+"loading"} loading={"Loading..."}/>
                             )
                         })
                     }
@@ -93,7 +93,7 @@ const Home = () => {
                         homeProductCartListVegetables[0] ? homeProductCartListVegetables.map((el) => {
                             return(
                                 <CardFeature 
-                                    key={el._id}
+                                    key={el._id+"vegetable"}
                                     id={el._id}
                                     name={el.name}
                                     price={el.price}
@@ -105,7 +105,7 @@ const Home = () => {
                         : (
                             loadingArrayFeature.map((el, index) => {
                                 return(
-                                    <CardFeature key={index} loading="Loading..."/>
+                                    <CardFeature key={index+"cartLoading"} loading="Loading..."/>
                                 )
                             })
                         )

@@ -19,7 +19,7 @@ const Header = () => {
 
     const userData = useSelector((state) => state.user)
     // console.log(userData); // {email: "", ....}
-    console.log(userData.email);
+    // console.log(userData.email);
 
     const dispatch = useDispatch()
     
@@ -32,7 +32,13 @@ const Header = () => {
         toast("Logout successfully")
     }
 
-    console.log(import.meta.env.VITE_ADMIN_EMAIL);
+    /**
+     * count product on cartItem redux
+     * 28/6/2024
+     */
+    const cartItemNumber = useSelector((state) => state.product.cartItem)
+
+    // console.log(import.meta.env.VITE_ADMIN_EMAIL);
 
     return (
         <div className='fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white'>
@@ -56,7 +62,7 @@ const Header = () => {
                         <Link to={"/cart"}>
                             <BsCartFill />
                             <div className='absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 rounded-full m-0 p-0 text-sm flex items-center justify-center'>
-                                0
+                                {cartItemNumber.length}
                             </div>
                         </Link>
                     </div>

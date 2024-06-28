@@ -310,8 +310,46 @@ const [dataFilter, setDataFilter] = useState(productData)
 <Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}><Link>
 ```
 
-### Fix bugs: Khi ta render AllProduct cứ thế chạy mà không hiện loading 
+### Khi ta render AllProduct cứ thế chạy mà không hiện loading 
 => Thêm logic Loading
+
+### Sửa lỗi chuyển trang ở CardFeature.jsx. Khi ta bấm vào button Add Cart thì nó bị chuyển sang trang chi tiết product mà không product vào cart
+
+# Code ban đầu
+```jsx
+<Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}>
+    <div className="h-28 flex flex-col justify-center items-center">
+        <img src={image} className="h-full"/>
+    </div>
+    <h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">{name}</h3>
+    <p className="text-center text-slate-500 font-medium">{category}</p>
+    <p className="text-center font-bold">
+        <span className="text-red-500">₹</span>
+        <span>{price}</span>
+    </p>
+    <button className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full">Add Cart</button>
+</Link>
+```
+
+# Sửa lại
+
+```jsx
+<>
+    <Link to={`/menu/${id}`} onClick={() => window.scrollTo({top: "0", behavior: "smooth"})}>
+        <div className="h-28 flex flex-col justify-center items-center">
+            <img src={image} className="h-full"/>
+        </div>
+        <h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">{name}</h3>
+        <p className="text-center text-slate-500 font-medium">{category}</p>
+        <p className="text-center font-bold">
+            <span className="text-red-500">₹</span>
+            <span>{price}</span>
+                            </p>
+    </Link>
+    <button className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 w-full" onClick={(e) => handleAddCartProduct(e)}>Add Cart</button>
+</>
+```
+
 
 ### Lưu ý : 
 
