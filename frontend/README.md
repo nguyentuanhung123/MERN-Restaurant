@@ -362,3 +362,15 @@ const [dataFilter, setDataFilter] = useState(productData)
 - Thẻ form khi được đặt trong một thẻ div sẽ luôn có width: 100% dù chứa những thẻ input hay thẻ select nhỏ bên trong
 - Thẻ span khi chứa thẻ svg bên trong thì sẽ có width là 100% và height tùy chỉnh nhưng svg bên trong sẽ có mặc định riêng như 48x48
 - Ở thẻ textarea khi hiện lên màn hình thì có cơ chế tùy chỉnh dòng (ở bê trái góc dưới) -> để xóa tính năng này ta thêm class: resize-none
+
+### Trong file .env
+
+VITE_SERVER_DOMAIN = "http://localhost:8080/api"
+VITE_ADMIN_EMAIL = ""
+VITE_STRIPE_PUBLIC_KEY = ""
+
+### Khi deploy lên Vercel thay bằng
+
+VITE_SERVER_DOMAIN = "https://mern-restaurant-epmd.onrender.com/api"
+VITE_ADMIN_EMAIL = ""
+VITE_STRIPE_PUBLIC_KEY = ""
