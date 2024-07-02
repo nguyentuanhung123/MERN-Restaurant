@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem)
-  console.log("productCartItem: ", productCartItem);
+  // console.log("productCartItem: ", productCartItem);
 
   const user = useSelector((state) => state.user)
-  console.log(user); // {email: '', firstName: '', image: '', lastName: '', _id: ''}
+  // console.log(user); // {email: '', firstName: '', image: '', lastName: '', _id: ''}
 
   const totalPrice = productCartItem.reduce((acc, curr) => acc + parseInt(curr.total), 0)
   const totalQty = productCartItem.reduce((acc, curr) => acc + parseInt(curr.qty), 0)

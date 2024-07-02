@@ -20,7 +20,7 @@ const Menu = () => {
      * Get product detail on productList
      */
     const productDisplay = productData.filter((el) => el._id === filterby)[0]
-    console.log("productDisplay: ", productDisplay);
+    // console.log("productDisplay: ", productDisplay);
 
     /**
      * Add Product To Cart
