@@ -41,25 +41,28 @@ export const productSlice = createSlice({
         },
         increaseQty: (state, action) => {
             const index = state.cartItem.findIndex((el) => el._id === action.payload)
+
+            // increase qty
             let quantity = state.cartItem[index].qty
             const qtyInc = ++quantity
             state.cartItem[index].qty = qtyInc
 
+            // increase total price
             const price = state.cartItem[index].price
             const total = price * qtyInc
-
             state.cartItem[index].total = total
         },
         decreaseQty: (state, action) => {
             const index = state.cartItem.findIndex((el) => el._id === action.payload)
             let quantity = state.cartItem[index].qty
             if(quantity > 1){
+                // decrease qty
                 const qtyDec = --quantity
                 state.cartItem[index].qty = qtyDec;
 
+                // decrease total price
                 const price = state.cartItem[index].price;
                 const total = price * qtyDec;
-
                 state.cartItem[index].total = total;
             }
         }

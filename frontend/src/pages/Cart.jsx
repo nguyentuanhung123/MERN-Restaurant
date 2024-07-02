@@ -1,7 +1,13 @@
+// redux
 import { useSelector } from "react-redux"
+// component
 import CartProduct from "../components/CartProduct";
-
+// image
 import emptyCartImage from '../assets/empty.gif'
+// toast
+import toast from "react-hot-toast";
+// stripe
+import { loadStripe } from '@stripe/stripe-js'
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem)
@@ -9,6 +15,27 @@ const Cart = () => {
 
   const totalPrice = productCartItem.reduce((acc, curr) => acc + parseInt(curr.total), 0)
   const totalQty = productCartItem.reduce((acc, curr) => acc + parseInt(curr.qty), 0)
+
+  const handlePayment = async () => {
+    const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+    const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/checkout-payment`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(productCartItem)
+    })
+
+    if(res.statusCode === 500) return;
+
+    const data = await res.json()
+    console.log(data);
+
+    toast("Redirect to payment Gateway...!")
+    stripePromise.redirectToCheckout({
+      sessionId: data
+    })
+  }
   return (
     <>
       <div className="p-2 md:p-4">
@@ -53,7 +80,9 @@ const Cart = () => {
                     {totalPrice}
                   </p>
                 </div>
-                <button className="bg-red-500 w-full text-lg font-bold py-2 text-white">Payment</button>
+                <button className="bg-red-500 w-full text-lg font-bold py-2 text-white" onClick={handlePayment}>
+                  Payment
+                </button>
               </div>
             </div>
           ) : (

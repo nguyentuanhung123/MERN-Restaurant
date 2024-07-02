@@ -285,7 +285,8 @@ useEffect(() => {
 ```
 
 - Do productData lấy ở store nhưng trong store chỉ có dữ liệu sau khi useEffect ở App.jsx nên ban đầu productData ở Home.jsx không có dữ liệu chỉ sau khi các component trong project chạy xong thì useEffect ở App.jsx mới chạy và productData mới có dữ liệu
-- Lý do tại sao ta không để productData trong state dataFilter là do ban đầu productData không có dữ liệu nên khi state dataFilter cũng sẽ không có dữ liệu nên ta phải bổ sung useEffect trong Home.jsx để sau khi productData thay đổi thì state dataFilter sẽ được cập nhật dữ liệu
+- Lý do tại sao ta không để productData trong state dataFilter là do ban đầu productData không có dữ liệu nên state dataFilter cũng sẽ không có dữ liệu nên ta phải bổ sung useEffect trong Home.jsx để sau khi productData thay đổi thì state dataFilter sẽ được cập nhật dữ liệu
+- Sau khi useEffect ở App.jsx được chạy productList sẽ được cập nhật nhưng app sẽ không re-render do không phải là cập nhật state nên ở AllProduct.jsx thì state dataFilter không cập nhật state
 - Nếu ta để
 ```jsx
 const [dataFilter, setDataFilter] = useState(productData)
@@ -350,6 +351,11 @@ const [dataFilter, setDataFilter] = useState(productData)
 </>
 ```
 
+### Tải stripe cho frontend
+- B1: npm i @stripe/stripe-js
+- B2: npm i @stripe/react-stripe-js
+
+### Nếu hiện log Promise {<pending>} thì tức là ở frontend có chỗ nào đó thiếu await
 
 ### Lưu ý : 
 
