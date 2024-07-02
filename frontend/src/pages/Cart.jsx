@@ -8,33 +8,48 @@ import emptyCartImage from '../assets/empty.gif'
 import toast from "react-hot-toast";
 // stripe
 import { loadStripe } from '@stripe/stripe-js'
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem)
   console.log("productCartItem: ", productCartItem);
 
+  const user = useSelector((state) => state.user)
+  console.log(user); // {email: '', firstName: '', image: '', lastName: '', _id: ''}
+
   const totalPrice = productCartItem.reduce((acc, curr) => acc + parseInt(curr.total), 0)
   const totalQty = productCartItem.reduce((acc, curr) => acc + parseInt(curr.qty), 0)
 
+  const navigate = useNavigate()
+
   const handlePayment = async () => {
-    const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
-    const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/checkout-payment`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(productCartItem)
-    })
 
-    if(res.statusCode === 500) return;
-
-    const data = await res.json()
-    console.log(data);
-
-    toast("Redirect to payment Gateway...!")
-    stripePromise.redirectToCheckout({
-      sessionId: data
-    })
+    if(user.email) {
+        const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+        const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/checkout-payment`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(productCartItem)
+        })
+  
+        if(res.statusCode === 500) return;
+  
+        const data = await res.json()
+        console.log(data);
+  
+        toast("Redirect to payment Gateway...!")
+        stripePromise.redirectToCheckout({
+          sessionId: data
+        })
+    }
+    else {
+        toast("You have not Login...!")
+        setTimeout(() => {
+          navigate("/login")
+        }, 1000)
+    }
   }
   return (
     <>
