@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 const App = () => {
 
   const dispatch = useDispatch();
-  const productData = useSelector((state) => state.product)
+  // const productData = useSelector((state) => state.product)
 
   // console.log(productData);
 
