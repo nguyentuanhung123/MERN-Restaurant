@@ -26,7 +26,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const userData = useSelector(state => state)
-    console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
+    // console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
     // console.log("userData on reducer 2: ", userData.user); // {email: "", ....}
 
     const dispatch = useDispatch();
@@ -61,7 +61,7 @@ const Login = () => {
             })
 
             const dataRes = await dataResponse.json()
-            console.log(dataRes);
+            // console.log(dataRes);
             
             toast(dataRes.message)
 

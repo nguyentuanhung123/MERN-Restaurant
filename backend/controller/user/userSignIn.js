@@ -2,7 +2,7 @@ const userModel = require("../../models/userModel.js")
 
 const userSignInController = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const { email } = req.body;
 
         const user = await userModel.findOne({email: email})
