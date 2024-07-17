@@ -25,6 +25,7 @@ const Login = () => {
 
     const navigate = useNavigate()
 
+    // eslint-disable-next-line no-unused-vars
     const userData = useSelector(state => state)
     // console.log("userData on reducer 1: ", userData); // user: {email: "", ....}
     // console.log("userData on reducer 2: ", userData.user); // {email: "", ....}
